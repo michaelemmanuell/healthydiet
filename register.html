@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Adam Gwóźdź">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Registration</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/static/css/base.css">
+    <link rel="stylesheet" href="/resources/static/css/buttons.css">
+</head>
+
+<body>
+    <div class="container">
+        <form class="form-signin" method="post" action="#" autocomplete="off" th:action="@{/register}"
+            th:object="${user}">
+            <h2 class="form-signin-heading">Registration</h2>
+            <p>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" th:field="*{username}" id="username" name="username"
+                    class="form-control change-color" placeholder="Username" minlength="3" required autofocus="">
+            </p>
+            <p>
+                <label for="name" class="sr-only">name</label>
+                <input type="text" th:field="*{name}" id="name" name="name" class="form-control change-color"
+                    placeholder="Name" required autofocus="">
+            </p>
+            <p>
+                <label for="name" class="sr-only">email</label>
+                <input type="email" th:field="*{email}" id="email" name="email" class="form-control change-color"
+                       placeholder="Email" required autofocus="">
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" th:field="*{password}" id="password" name="password"
+                    class="form-control change-color" placeholder="Password" minlength="6" required>
+            </p>
+            <p>
+                <label for="confirmPassword" class="sr-only">Confirm Password</label>
+                <input type="password" th:field="*{confirmPassword}" id="confirmPassword" name="confirmPassword"
+                    class="form-control change-color" placeholder="confirmPassword" minlength="6" required>
+            </p>
+            <input name="_csrf" type="hidden" value="60c9dc4c-540b-4fa1-ba67-5845c39f9c4a">
+            <div class="d-flex justify-content-center">
+                <a href="../templates/diet.html" class="btn button-sign btn-lg btn-block" role="button" type="submit">Sign Up</a>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center flex-row ">
+            <p class="mt-3 mr-2">Already have account?</p>
+            <form method="get" action="/login">
+                <a href="../templates/login.html" class="btn btn-lg btn-block button-sign ms-2" role="button" type="submit">Login</a>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

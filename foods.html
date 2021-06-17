@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Adam Gwóźdź">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/static/css/base.css">
+    <link rel="stylesheet" href="/resources/static/css/buttons.css">
+
+    <title>Diet App</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+    <style>
+        @media only screen and (max-width: 440px) {
+            #main {
+                height: 80vh;
+            }
+        }
+
+        .result,
+        h1 {
+            text-align: center;
+        }
+
+        .input-c {
+            display: block;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #212529;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            width: 96px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex justify-content-center align-items-center" id="main">
+        <div class="d-flex flex-column">
+            <h1>Search Food</h1>
+            <form action="#" th:action="@{/foods/search}" th:object="${newFood}" method="post">
+                <div class="d-flex flex-row">
+                    <p><input type="text" th:field="*{name}" class="form-control change-color" placeholder="food name" required="">
+                    </p>
+                    <p><input type="submit" value="Search" class="btn btn-search"></p>
+                </div>
+            </form>
+            <div th:if="${food} != NULL">
+                <div th:if="${food.getName()} != NULL">
+                <h1 th:text="${food.getName()} "></h1>
+                <div class="result" style="text-align: center">
+                    <p class="rounded border border-secondary"  th:text="'Calories: ' + ${food.getCalories()} + ' kcal'" />
+                    <p class="rounded border border-success"  th:text="'Weight: ' + ${food.getWeight()} +' gram'" />
+                    <p class="rounded border border-danger"  th:text="'Carbohydrates: ' + ${food.getCarbohydrates()} + ' gram'" />
+                    <p class="rounded border border-warning"  th:text="'Fat: ' + ${food.getFat()} + ' gram'" />
+                    <p class="rounded border border-info"  th:text="'Protein: ' + ${food.getProtein()} + ' gram'" />
+                    <p class="rounded border border-white"  th:text="'Sugar: ' + ${food.getSugar()} + ' gram'" />
+                </div>
+                <div class="d-flex flex-row">
+                    <form th:action="@{/foods/add}" th:method="get">
+                        <button type="Submit" class="btn btn-search">Add food</button>
+                    </form>
+                    <form th:action="@{/foods/put}" th:object="${newFood}" method="post">
+                        <div class="d-flex flex-row">
+                            <p><input type="number" min="1" th:field="*{weight}" class="input-c change-color" placeholder="weight">
+                            </p>
+                            <p><input type="submit" value="set weight" class="btn btn-search"></p>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            <div th:unless="${food} != NULL">
+                <p style="color:red;">Food with this name not exist!</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
